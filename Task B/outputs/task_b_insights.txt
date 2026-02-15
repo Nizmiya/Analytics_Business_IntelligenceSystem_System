@@ -1,0 +1,6 @@
+Task B insights:
+Top 10 countries: 68.2 % of total arrivals
+Top 17 countries = 80% of total arrivals
+India alone: 20.8 %
+UK + Russia + Germany: 23.5 %
+Very low (<100) countries: 82

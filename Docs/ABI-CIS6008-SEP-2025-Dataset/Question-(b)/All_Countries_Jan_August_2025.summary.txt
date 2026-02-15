@@ -1,0 +1,12 @@
+Sheets: ['All Country']
+
+Sheet: All Country
+Shape: (200, 16)
+Columns: Unnamed: 0, Tourist arrivals from all countries, 2025 , Unnamed: 2, Unnamed: 3, Unnamed: 4, Unnamed: 5, Unnamed: 6, Unnamed: 7, Unnamed: 8, Unnamed: 9, Unnamed: 10, Unnamed: 11, Unnamed: 12, Unnamed: 13, Unnamed: 14, Unnamed: 15
+Sample rows:
+ Unnamed: 0 Tourist arrivals from all countries, 2025   Unnamed: 2 Unnamed: 3 Unnamed: 4 Unnamed: 5 Unnamed: 6 Unnamed: 7 Unnamed: 8 Unnamed: 9 Unnamed: 10 Unnamed: 11  Unnamed: 12  Unnamed: 13  Unnamed: 14 Unnamed: 15
+        NaN                                        NaN         NaN        NaN        NaN        NaN        NaN        NaN        NaN        NaN         NaN         NaN          NaN          NaN          NaN         NaN
+        NaN                                       Rank     Country   January    February      March      April        May       June       July      August       Total          NaN          NaN          NaN         NaN
+        NaN                                          1 Afghanistan          6         15          2         21         10          2          1           3          60          NaN          NaN          NaN         NaN
+        NaN                                          2     Albania         17         33         10         14         13          3          8          30         128          NaN          NaN          NaN         NaN
+        NaN                                          3     Algeria         26         43         19         20         31         37         23          54         253          NaN          NaN          NaN         NaN

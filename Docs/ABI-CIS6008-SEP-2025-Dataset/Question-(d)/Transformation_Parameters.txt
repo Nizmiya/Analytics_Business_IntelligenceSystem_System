@@ -1,0 +1,19 @@
+SL Datum 1999 (SLD99)  
+ 
+Coordinates of Piduruthalaga la  -  500 000 N, 500 000 E  
+ 
+Transformation Parameters   -  WGS 84 to Everest Ellipsoid  
+Shifts X= 0.2933 
+ Y= -766.9499  Z= -87.7131  Rotation X= 0.1957040 seconds   Y= 1.6950677   Z= 3.4730161  Scale Factor   1.0000000393   
+Projection Parameters   -  Everest E llipsoid to Transverse Mercator Projecton 
+ 
+Everest India 1830 
+False Easting    500000 False Northing  500000     Central Meridian 80  46  18.16710  E Central Parallel 7    00    1.69750  N Scale Factor 0.9999238418   
+Note :  
+1:10,000 & 1:50,000 Topographic Mapping purpose, the False Easting & False Northing 
+could be used as 200,000 & 200,000 respectively. 
+ 
+ 
+  
+ 
+ 

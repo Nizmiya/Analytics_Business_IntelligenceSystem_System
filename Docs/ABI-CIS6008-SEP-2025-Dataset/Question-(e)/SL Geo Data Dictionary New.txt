@@ -1,0 +1,1145 @@
+Survey Department of Sri Lanka.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Topographic Database 
+Specifications  
+and 
+Data Dictionary  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Surveyor General’s office,  
+P.O. Box 506,  
+150, Kirula Road,  
+Colombo 5,  
+Sri Lanka.  
+
+1 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+ Database Specifications  
+ 
+Introduction.  
+ 
+A Map is a representation of geographic features and places and their spatial relationships 
+to one another, to a scale on a paper or other physical media. A map usually, provides a  
+large  amount spatial of information, in a relatively small space. However, there is still a 
+great deal of information about geographic features, that could not be practically shown on 
+a map, due to lack of pace.  
+ 
+It takes a significant amount of time for retri eval of information from a map, partly due to 
+the time taken for retrieve a map itself from where it is stored, and to retrieve information 
+itself.  
+ 
+With the advent of computer and information technology, and it’s impact on Automated or 
+Digital Mapping, it  has become possible to store a vast amount of map information in a 
+much less physical storage space, with the ability for faster retrieval of information as 
+well.  
+ 
+However, there is further great deal of information, related to geographic features, that 
+cannot be handled even in the automated mapping as they are in the form of attribute  
+information to the map features.  
+ 
+With the development of Data Base Management Systems, it has become possible to 
+manage these attribute information that cannot be physic ally placed on a map.  
+ 
+The Geographic Information System (GIS) is a combination of Digital Mapping and 
+Database Management System. This has the ability to link, spatial information to attribute 
+information, and to retrieve & analyze spatially related infor mation including the attribute 
+information and related geographic features.  
+ 
+This specification and the data dictionary is aimed at documenting the ways in which the 
+geographic data and attribute information is organised in the GIS dada base designed and 
+compiled by the Survey Department of Sri Lanka.  
+ 
+In principle, there is no single correct procedure for database design. The major 
+factors that influence a GIS database design, are the data requirements of the 
+applications that will be developed, availabili ty and the format of existing 
+topographic data, update and maintenance procedures, size of the data base, 
+hardware configuration, data model of the software used, number and organizational 
+structure of users, cost involved and management support.  
+ 
+
+2 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+ The Map  Sheet dimensions and Neat  line Dimensions and Position.  
+ 
+ 
+1:50,000 Map sheet . 
+ 
+The map dimensions are 0.8m west -east and 0.5 m south -north representing the ground 
+dimensions of 40,000m X 25000 m area. (1000 sq. km).  
+ 
+The neat lines for all sheets form the positions of grid index map for 1: 50,000 sheets. For 
+eg. Sheet number 76 is positioned at 200,000 N, 150,000 E (SW corner) and 240,000 N, 
+175,000 E (NE corner).  
+ 
+1:10,000 Map sheet  
+ 
+The map dimensions are 0.8m west -east and 0.5 m south -north representing the ground 
+dimensions of 8000 m X 5000 m. (40 sq. km)  
+ 
+The neat lines for all sheets form the positions of grid index map for 1: 10,000 sheets. For 
+eg. Sheet number 76/14 is positioned at 160,000 N, 224,000 E (SW corn er) and 165,000 
+N, 232,000 E (NE corner).  
+ 
+Grid lines . 
+ 
+The grid lines are the linear features that defines the individual map sheet limits & internal 
+grids, and are placed in a separate coverage called GRID. These lines are also used to 
+close polygons at the sheet limit.  
+ 
+Sheet/Tile Numbering.  
+ 
+Each Map sheet or tile or workspace is numbered as shown below.  
+ 
+1:50,000 sheets  01 to 92 to represent 92 map sheets, of 1:50,000 scale.  
+ 
+1:10,000 sheets  0101 to 9225 to represent 1/1 to 92/25 sheets.  
+There are 25  such sheets to cover one 50,000 sheet area. Since some 
+sheets may not contain any data, one would find some sheet 
+numbers do not exist in the database.  It is estimated that there are 
+1834 sheets of this nature.  
+ 
+1:2,000 sheets   010101 to 922525 to repres ent 1/1/1 to 92/25/25 sheets.  
+There are 25 such sheets to cover one 10,000 sheet area. Since some 
+sheets may not contain any data, one would find some sheet 
+numbers do not exist in the database.   
+ 
+1:1,000 sheets   010101A to 922525D to represent 1/1/1/A t o 92/25/25/D sheets.  
+There are 4 such sheets to cover one 2,000 sheet area. Since some 
+sheets may not contain any data, one would find some sheet 
+numbers do not exist in the database.   
+ 
+ 
+ 
+
+3 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+ Features.  
+ 
+All features in the database are listed below under the Data Dictionary, indicating the 
+feature name, code, definition, and rules of compilation wherever necessary.  
+ 
+Attributes . 
+ 
+There are a number of different user attributes attached to features in the database listed in 
+the features.  
+ 
+Layers.  
+ 
+A layer is a l ogical collection of geographic features with common characteristics. There 
+are nine (09) layers plus a NEAT layer available for the data base.  
+ 
+TICs  
+ 
+Four TICs are in each coverage as control points for scale and orientation of digital data. 
+They are numb ered as TIC -ID 1 (SW corner), TIC -ID 2 (NW corner), TIC -ID 3 (NE 
+corner), and TIC -ID 4 (SE corner) at four corners of the neat line.  
+ 
+Vector Data Model  
+ 
+The data model used is the ARC/INFO data model. Layers of data are stored in a package 
+called a ‘Covera ge’. Attributes for features are maintained in INFO data files. Some of 
+these (eg. LENGTH, AREA etc) are generated as a standard to ARC/INFO coverage and 
+some are user identified as specified in the Data Dictionary. The coordinates are in two 
+dimensional, and are stored in double precision.  
+ 
+The feature types of geometric data used are as follows. These features are defined by the 
+coordinate positions of New Conformal Coordinates.  
+ 
+Point   Zero dimensional object formed by a single coordinate pair.  
+ 
+Tic  A graphic element formed by a single coordinate pair. It is used as a  
+reference marker linking a graphic input device with the features in the  
+coverage.  
+ 
+Arc  One dimensional object formed by a sequence of coordinate pairs. Each  
+coordinate  pair is referred a to as a vertex.  
+ 
+Node   Zero dimensional object formed by a single coordinate pair, and is either  
+the beginning or ending vertex of one or more Arcs.  
+ 
+Polygon  Two dimensional object formed by one or more sequences of one or more  
+interc onnected arcs.  
+ 
+ 
+ 
+ 
+Tabular Data Model . 
+
+4 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+  
+The tabular data model used is the Database Management System of ARC/INFO called 
+INFO. The data types that can be used in INFO are as follows.  
+ 
+B Binary   Number, stored as a binary integer. It can have an implied dec imal  
+point.  
+ 
+C  Character  Fixed length character string up to 4096 bytes (characters)  
+ 
+D Date   Date field, stored internally as YYYYMMDD  
+ 
+F Floating  Number stored in Floating point format.  
+ 
+I Integer   Number( Integer) item up to 16 bytes (digits), with no decimal  
+point.  
+ 
+N Number  Number with decimal places. Can have up to 16 bytes (digits)  
+including the decimal point.  
+ 
+Coordinate System  & Datum . 
+ 
+All coordinates are in meters according to the New conformal co ordinate system and is 
+based on the Transverse Mercator Projection with the following parameters.  
+ 
+Transformation Parameters   -  WGS 84 to Everest Ellipsoid  
+ 
+Shifts  X= 0.2933  
+ Y= -766.9499  
+ Z= -87.7131  
+ 
+Rotation  X= 0.1957040 seconds  
+  Y= 1.6950677  
+  Z= 3.4730161  
+ 
+Scale Factor   1.0000000393  
+ 
+Projection Parameters   -  Everest Ellipsoid to Transverse Mercator Projecton  
+ 
+Everest India 1830  
+False Easting    200000  
+False Northing  200000  
+    
+Central Meridian  80  46  18.16700  E  
+Central Parallel  7    00    1.69750  N  
+Scale Factor  0.9999238418  
+ 
+ 
+The vertical datum is Mean sea level as defined by the Survey Department of Sri Lanka.   
+ 
+ 
+ 
+
+5 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+ Accuracy.  
+ 
+The accuracy of the planimmetric data is within +/ - 2.5 m of their true positions on the 
+ground for 1:10,000 and +/ - 12.5 m of their true positions on the ground for 1:50,000 
+mapping data.  
+ 
+Similarly the accuracy of the planimetric data is within +/ - 25 cm of their true positions on 
+the ground for 1:1,000 and +/ - 50 cm of their true positions on the ground for 1:2,000  
+mapping data  
+ 
+This represents 0.25 mm at the map scale.  
+  
+ 
+Accuracy of height data  
+ 
+The accuracy of the height data is within +/ - 1 m of their true elevations on the ground for 
+1:10,000 and +/ - 3 m of their true elevations on the ground for 1:50,000 mapp ing data.  
+ 
+The above figures represent the maximum allowed error in position. Some data collected 
+and compiled by more precise methods have better accuracy.  
+ 
+Compilation Rules .  
+ 
+The linear features that are equal or longer than 2.5 m, and area features that are larger 
+than 2.5 X 2.5 m^2 (with the exception of Roads which are compiled as linear features 
+only) will be the compiled in case of 1:10,000 scale of compilation and it will  be 12.5 m 
+for linear and 12.5X12.5 m^2 for area features in case of 1:50,000 scale of  compilation.  
+ 
+Similarly the linear features that are equal or longer than 25 cm, and area features that are 
+larger than 25 X 25 cm^2 will be the compiled in case of 1:1 ,000 scale of compilation and 
+it will be 50 cm for linear and 50X50 cm^2 for area features in case of 1:2,000 scale of  
+compilation.  
+ 
+Quality Assurance .  
+ 
+A number of steps have been taken to ensure the quality of data under the following 
+primary areas .  
+ 
+1. Positional accuracy of the content,  
+ 
+2. Completeness of the content.  
+ 
+3. Edge matching to assure the continuity of features running into more than one sheet.  
+ 
+ 
+ 
+  
+
+6 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+ Data Dictionary  
+ 
+Table of Contents . 
+ 
+Coverage  Page  
+ 
+BUILDING  8 
+ 
+TRANS  11 
+ 
+LUSE  13 
+ 
+HYDRO  15 
+ 
+TERRAIN  17 
+ 
+PLACES         19 
+ 
+ADMIN         20 
+ 
+RESERVES         24 
+ 
+UTILITY  (1:10,000 only)      25 
+ 
+CONTROL         26 
+ 
+GRID          27
+
+7 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+ Coverage name  : BUILDING   
+ 
+Scale of compilation  : 1:10,000 & 1: 50,000  
+ 
+Feature Class   : Polygons (1:10,000) & Point s (1: 50,000)  
+ 
+Description   : All Buildings compiled as building polygons or points.  
+ 
+Features   : All building features, that can be shown as building polygons.  
+ 
+Attribute table name  : BUILDING.PAT  
+ 
+Attribute descriptions  : 
+ 
+Item  Item Format  Value Domain   Value Description  
+ 
+GFCODE  5,5,C    See table below  See table below  
+ 
+SDCODE  3,3,I  See table below  See table below  
+ 
+SDCODE  GFCODE   FEATURE DESCRIPTION (In 1:10,000 scale)  
+ 
+100  BLDGA   Building -Unspecified – without name  
+110  BTMPA   Buddhist Temple  
+112  HTMPA   Hindu Temple (Kovil)  
+114  CHRHA   Church  
+116  MOSQ  A  Mosque  
+120  USCHA   School – Unclassified  
+127  UNSTA   University  
+128  TCHCA   Technical College  
+129  TREIA    Tertiary Education Institutes  
+130  UHSPA   Hospital – Unclassified  
+137  PHSPA   Hospit al -Private  
+134  DSPNA   Dispensary  
+140  PLCSA   Police Station  
+142  PLCPA   Police Post  
+148   UCRTA   Courts - Unclassified  
+150  MPOFA   Main Post Office  
+152  SPOFA   Sub Post Office  
+153  APOFA   Agency Post Office  
+154  UPOFA   Post Office - Unclassified  
+160  HOTLA   Hotel  
+162  RTHSA   Rest House  
+164  CTBNA   Circuit Bungalow  
+180  CMTBA   Cemetery Building  
+184  LTHSA   Light House  
+170  PTHSA   Private House  
+172  GVTBA   Other Govt Building  
+174  HSTSA   Historical Monument  
+176  BANKA   Bank Building  
+178  CMMBA   Commercia l Buildings  
+179  FCTRA   Factory Building  
+
+8 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+ 190  BLDCA   Building Under Construction  
+180  RLSTA   Railway Station  
+181  RLHTA   Railway Halt  
+182  BUSSA   Bus Stand  
+184  FLSTA   Filling Station  
+192  APRTA   Air Port  
+194  PORTA   Port 
+ 
+SDCODE  GFCODE   FEATURE DESCRIPTIO N (In 1:50,000 scale)  
+ 
+100  BLDGP   Building -Unspecified – without name  
+110  BTMPP   Buddhist Temple  
+112  HTMPP   Hindu Temple (Kovil)  
+114  CHRHP   Church  
+116  MOSQ  P  Mosque  
+120  USCHP   School – Unclassified  
+127  UNSTP   University  
+128  TCHCP   Technical College  
+129  TREIP    Tertiary Education Institutes  
+130  UHSPP   Hospital – Unclassified  
+137  PHSPP    Hospital -Private  
+134  DSPNP   Dispensary  
+140  PLCSP    Police Station  
+142  PLCPP    Police Post  
+148   UCRTP   Courts - Unclassified  
+150  MPOFP   Main Post Offi ce 
+152  SPOFP    Sub Post Office  
+153  APOFP   Agency Post Office  
+154  UPOFP   Post Office - Unclassified  
+160  HOTLP   Hotel  
+162  RTHSP   Rest House  
+164  CTBNP   Circuit Bungalow  
+180  CMTBP   Cemetery Building  
+184  LTHSP   Light House  
+170  PTHSP   Private House  
+172  GVTBP   Other Govt Building  
+174  HSTSP   Historical Monument  
+176  BANKP   Bank Building  
+178  CMMBP   Commercial Buildings  
+179  FCTRP   Factory Building  
+190  BLDCP   Building Under Construction  
+180  RLSTP   Railway Station  
+181  RLHTP   Railway Halt  
+182  BUSSP   Bus Stand  
+184  FLSTP    Filling Station  
+192  APRTP   Air Port  
+194  PORTP   Port 
+ 
+ 
+
+9 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+ NAME   50,50 C     Name of the building if any.  
+ 
+YEAR   4,4,B      Year of data collection.  
+  
+METHOD  2,2,B   1   Digitized from 1:50,000 maps  
+    2   Digitized from 1:10,000 maps  
+3   Compiled form 1: 50,000 photographs  
+4   Compiled form 1: 20,000 photographs  
+5   Compiled form 1: 8,000 photographs  
+6   Compiled by Ground Survey  
+7   Compiled by Manual Sketching   
+
+10 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+ Coverage name  : TRANS  
+ 
+Scale of compilation  : 1:10,000 & 1: 50,000  
+ 
+Feature Class   : Arcs  
+ 
+Description   : All Roads and Railways  
+ 
+Features   : Linear features showing Roads and Railways  
+ 
+Attribute Table  : TRANS.AAT  
+ 
+Attribute descriptions  : 
+ 
+Item  Item Format  Value Domain   Value Description  
+ 
+GFCODE  5,5,C    See table below  See table below  
+ 
+SDCODE  3,3,I  See table below  See table below  
+ 
+SDCODE  GFCODE   FEATURE DESCRIPTION  
+ 
+200  EXPRL   Expressway  
+210  MNRDL   Main Roads  
+211  MRBR  L  Main road on Bridge  
+212  MRBNL   Main road on Bund  
+213  MRTN  L  Main road along Tunnel  
+214  MRCWL   Main road on Causeway  
+220  SDRDL   Secondary/Minor Roads  
+221  SRBRL   Secondary/Minor Road on Bridge  
+222  SRBNL   Secondary/Minor road on Bund  
+223  SRTNL   Secondary/Minor road along Tunnel  
+224  SRCWL   Secondary/Minor road on Causeway  
+240  TRCKL   Jeep/Cart Trac k 
+241  TRBRL   Track on Bridge  
+242  TRBNL   Track on Bund  
+243  TRTNL   Track along Tunnel  
+244  TRCWL   Track on causeway  
+245  LANEL   Lane  
+250 FTPHL   Footpath  
+251  FPBRL   Footpath on Bridge  
+252  FPBNL   Footpath on Bund  
+253  FPTNL   Footpath along Tunnel  
+260  RAILL    Railways  
+261  RLBRL   Railway line on Bridge  
+262  RLBNL   Railway line on Bund  
+263  RLTNL   Railway line along Tunnel  
+265  RNWYL   Runway  
+267  TXWYL   Taxiway  
+270  BRDGL   Bridge    
+ 
+272  RDUCL   Road Under Construction  
+
+11 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+ 273  FRRYL   Ferry Service  
+275  RLCPL   Railway Crossing – Protected (line)  
+274  MISCL   Line Unidentified (applicable for 10,000 raw data)  
+ 
+ 
+TYPE   4,4,C   eg. A12 or B1   Type and Number for Roads  
+    BGS    Broad Gauge Single Railways  
+    BGD    Broad Gauge Double Railways  
+    NBG    Narrow & Broad G auge  
+    
+NAME   30,30,C  *   Name of the Roads if available.  
+ 
+YEAR   4,4,B      Year of data collection.  
+ 
+METHOD  2,2,B   1   Digitized from 1:50,000 maps  
+    2   Digitized from 1:10,000 maps  
+3   Compiled form 1: 50,000 photographs  
+4   Compiled form 1: 20,000 photographs  
+5   Compiled form 1: 8,000 photographs  
+6   Compiled by Ground Survey  
+7   Compiled by Manual Sketching   
+ 
+Note : 
+ Name of the Road, Lane etc. eg. KIRULA ROAD.   
+ Road Directions are stored as annotation feature class.  
+
+12 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+ Coverage name  : LUSE  
+ 
+Scale of  compilation  : 1:1,000 & 1: 50,000  
+ 
+Description   : All vegetation areas.  
+ 
+Feature Class   : Arcs and Polygons  
+ 
+Features  : Arcs that define vegetation/land cover polygons listed below and 
+polygons of such vegetation areas.  
+ 
+Arc Attribute Table  : No arc attributes  
+ 
+Polygon Attribute Table  : LUSE.PAT  
+ 
+Attribute Descriptions : 
+ 
+Item  Item Format  Value Domain   Value Description  
+ 
+GFCODE  5,5,C  See table below  See table below  
+ 
+SDCODE  3,3,I  See table below  See table below  
+ 
+SDCODE  GFCODE   FEATURE DESCRIPTION  
+ 
+ 
+300 MNGRA   Mangrove  
+305 MRSHA   Marsh  
+306 SWMPA   Swamp  
+310 PDDYA   Paddy  
+315 PDYAA   Paddy -abandoned  
+320 TEAA  Tea 
+322 RBBRA   Rubber  
+324 CCNTA   Coconut  
+331 CNMNA   Cinnamon  
+332 CTNLA   Cittranella  
+333 CSHWA   Cashew  
+334 PLMRA   Palmyrah  
+335 OLPMA   Oil Palm  
+336 SGCNA   Sugarcane  
+337 OTHRA   Other cultivations  
+338 MIXDA   Mixed tree and other perennial crops  
+339 SPRSA   Sparsely used cropland  
+340 FRSDA   Dense Forest  
+342 FRSOA   Open Forest  
+344 FRSPA   Forest Plantation  
+345 FRSUA   Forest - Unclassified  
+346 SCRBA   Scrub l and 
+350 CHNAA   Chena  
+352 GRSLA   Grassland  
+360 NLNDA   Associated non -agricultural land  
+362 BRRNA   Barren land  
+
+13 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+ 364 QRRYA   Quarry  
+365 DSTSA   Distorted surface  
+366 ROCKA   Rock  
+368 PARKA   Park 
+369 PLGDA   Playground  
+370 HOMSA   Homesteads/Garden  
+380 AQTCA   Aquati c farms  
+382 AGRCA   Agricultural farms  
+384 LSVTA   Livestock farms  
+399 UNCLA   Unclassified  
+378 CMTYA   Cemetery   
+372   SANDA   Sand areas  
+376   BLTPA   Built up area (only in 50,000)  
+390   HYDRA   All Water areas - Unclassified  
+  
+ 
+ 
+YEAR   4,4,B      Year of data collection.  
+  
+METHOD  2,2,B   1   Digitized from 1:50,000 maps  
+    2   Digitized from 1:10,000 maps  
+3 Compiled form 1: 50,000 photographs  
+4 Compiled form 1: 20,000 photographs  
+5 Compiled form 1: 8,000 photographs  
+6 Compiled by Ground Survey  
+7   Compiled by Manual Sketching.  
+
+14 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+  Coverage name  : HYDRO  
+ 
+Scale of compilation  : 1:10,000 & 1: 50,000  
+ 
+Feature Class   : Arcs & Polygons  
+ 
+Description   : All water bodies natural or man made  
+ 
+Features   : Linear and Polygon features showing Rivers, Streams, Channels.  
+ 
+Attribute Ta ble Name  : HYDRO.AAT  
+ 
+Attribute descriptions  : 
+ 
+Item  Item Format  Value Domain   Value Description  
+ 
+GFCODE  5,5,C    See table below  See table below  
+ 
+SDCODE  3,3,I  See table below  See table below  
+ 
+SDCODE  GFCODE   FEATURE DESCRIPTION  
+ 
+410  STRML   Boundary/feature of all Streams  
+412  STRMV   Stream virtual line  
+420  CHNLL   Irrigation Channel  
+422  CHNLV   Irrigation Channel virtual line  
+424  CHNAL   Channel (Abandoned)  
+425  CNNLL   Canal  
+428  TNNLL   Tunnel  
+430  RSVRL   Reservoir boundaries  
+432  LAKEL   Lake boundaries  
+434  TANKL   Tank boundaries  
+436  TANKV   Tank boundaries - virtual  
+436  TNKAL   Tank - abandoned boundaries  
+438  PONDL   Pond boundaries  
+440  LAGNL   Lagoon boundaries  
+442  LAGNV   Lagoon boundaries - virtual  
+444  LEWYL   Lewaya/Salt pan boundaries  
+446  LEWYV   Lewaya/Salt pan boundaries – virtual  
+448  WTRHL   Water holes boundaries  
+450  BUNDL   All bund lines  
+451  BNDAL   Bund line (Abandoned)  
+452  DAML    All Dam lines  
+453  SPLLL    Spill line  
+454  ANCTL   Anicut Line  
+460  OUTBL   Outline of the country  
+462  OUTBV   Outline of the country - virtual  
+490  HYDRV   Arcs to close polygons at the sheet edge.  
+492  ILNDL   Island Boundaries  
+ 
+NAME   50,50,C  * Name of the water feature (if available).  
+ 
+
+15 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+ YEAR   4,4,B    Year of data collection.  
+ 
+METHOD  2,2,B   1 Digitized from 1:50,000 maps  
+    2 Digitized from 1:10,000 maps  
+3 Compiled form 1: 50,000 photographs  
+4 Compiled form 1: 20,000 photographs  
+5 Compiled form 1: 8,000 photographs  
+6 Compiled by Ground Survey  
+7 Compiled by Manual Sketching   
+Note:  
+* Name of the River, Stream etc. eg. KELANI GANGA or YAN OYA.  
+  
+Attribute Table Name  : HYDRO.PAT  
+ 
+Attribute descriptions  : 
+ 
+Item  Item Format  Value Domain   Value Description  
+ 
+GFCODE  5,5,C    See table below  See table below  
+ 
+SDCODE  3,3,I  See table below  See table below  
+ 
+SDCODE  GFCODE   FEATURE DESCRIPTION  
+ 
+411  STRMA   Areas of all Minor Streams  
+431  RSVRA   Reservoirs  
+433  LAKEA   Lakes  
+435  TANKA   Areas of all tanks  
+437  TNKAA   Areas of all abandoned tanks  
+439  PONDA   Areas of all Ponds  
+441  LAGNA   Areas of all Lagoons  
+445  LEWYA   Areas of Lewaya/Salt pan  
+449  WTRHA   Areas of all Water holes  
+470  CNNLA   Areas of Canals  
+499  SEAA    All Sea areas  
+475  BNDAA   Bund abandoned areas  
+474  BUNDA   Bund areas  
+473  TNNLA   Tunnel areas  
+472  CHNAA   Channel - abandoned  
+421  CHNLA   Channel area  
+470  CNNLA   Canal area  
+494  ILNDA   Island areas  
+ 
+NAME   50,50,C  * Name of the water feature (if available).  
+ 
+YEAR   4,4,B    Year of data collection.  
+
+16 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+ Coverage name  : TERRAIN   
+ 
+Scale of compilation  : 1:10,000 & 1: 50,000  
+ 
+Feature Class   : ARCS & POINTS  
+ 
+Description   : All Contours and Height points  
+ 
+Features    : All Contour lines and points in which the heights are known.  
+  
+Arc Attribute Table  : TERAIN.AAT  
+ 
+Attribute descriptions  : 
+ 
+Item  Item Format  Value Domain   Value Description  
+ 
+GFCODE  5,5,C    See tab le below  See table below  
+ 
+SDCODE  3,3,I  See table below  See table below  
+ 
+SDCODE  GFCODE   FEATURE DESCRIPTION  
+ 
+500  INDXL   Index Contours  
+502  INDUL   Index Contours - Uncertain  
+510  INTRL    Intermediate Contours  
+512  INTUL   Intermediate Contours - Uncertain  
+514  SUPPL   Supplementary Contours  
+520  UNCRL   Uncertain Contours  
+530  BATHL   Bathematic Contours  
+ 
+Item  Item Format  Value Domain   Value Description  
+ 
+ELEVATION  5,5,I  as applicable   Elevation  
+ 
+YEAR   4,4,B   as applicable   Year of data collection.  
+  
+METHOD  2,2,B   1   Digitized from 1:50,000 maps  
+    2   Digitized from 1:10,000 maps  
+3   Compiled form 1: 50,000 photographs  
+4   Compiled form 1: 20,000 photographs  
+5   Compiled form 1: 8,000 photographs  
+6   Compiled by Ground Survey  
+7   Compiled by Manual Sketc hing 
+        
+Point Attribute table  : TERRAIN.PAT  
+ 
+Attribute descriptions  : 
+ 
+Item  Item Format  Value Domain   Value Description  
+ 
+GFCODE  5,5,C    SPHTP   All Spot Height Points  
+ 
+
+17 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+ SDCODE  3,3,I    540   All Spot Height Points  
+ 
+ELEVATION  4,4,F,3     Elevation  
+ 
+YEAR   4,4,B      Year of data collection.  
+  
+METHOD  2,2,B   1   Digitized from 1:50,000 maps  
+    2   Digitized from 1:10,000 maps  
+3   Compiled form 1: 50,000 photographs  
+4   Compiled form 1: 20,000 photographs  
+5   Compiled form 1: 8,000 photographs  
+6   Compiled by  Ground Survey  
+7   Compiled by Manual Sketching   
+
+18 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+ Coverage name  : PLACES  
+ 
+Scale of compilation  : 1:1,000 & 1: 50,000  
+ 
+Feature Class   : POINTS  
+ 
+Description   : All places and features symbolised as points  
+ 
+Features   : All places, culverts, that are symbolis ed as points  
+  
+Arc Attribute Table  : PLACES.PAT  
+ 
+Attribute descriptions  : 
+ 
+Item  Item Format  Value Domain   Value Description  
+ 
+GFCODE  5,5,C    See table below  See table below  
+  
+SDCODE  3,3,I  See table below  See table below  
+ 
+SDCODE  GFCODE   FEATURE DESCRIPTION  
+ 
+600  PLCEP   Place Name  
+602  VILLP    Village Name  
+604  GNDVP   GN Division Name  
+605  TOWNP   Town Name  
+606  ESTTP    Estate Name  
+607  JUNCP   Junction Name  
+610  TRNSP   Transformer point  
+612  SPLLP    Spill point  
+614  SLCEP   Sluice Point  
+616  ANCTP   Anicut Poi nt 
+618  CLVTP   Culvert  
+620  RLCPP   Railway Crossing – Protected  
+622  RLCUP   Railway Crossing – Un protected  
+624  KLMPP   Kilo meter posts  
+  TRIGP    Trig Points  
+626  HLPDP   Helicopter pad  
+628  WTRFP   Water Fall  
+630  MISCP   Miscellaneous point  
+632  TBWLP   Tube Well  
+640  TOWRP   Tower  
+645  FORDP   Ford  
+ 
+NAME   50,50,C     Name of the place if any.  
+ 
+YEAR   4,4,B      Year of data collection.  
+  
+METHOD  2,2,B   1   Digitized from 1:50,000 maps  
+    2   Digitized from 1:10,000 maps  
+3   Compiled form 1: 50,000 photographs  
+4   Compiled form 1: 20,000 photographs  
+
+19 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+ 5   Compiled form 1: 8,000 photographs  
+6   Compiled by Ground Survey  
+7   Compiled by Manual Sketching   
+
+20 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+ Coverage name  : ADMIN  
+ 
+Scale of compilation  : 1:1,000 & 1: 50,000  
+ 
+Feature Class   : Arcs and Polygons  
+ 
+Descript ion  : Administrative boundaries and administrative areas.  
+ 
+Features  :Administrative boundaries and polygons of DS divisions and the 
+Local Government areas.  
+ 
+Arc Attribute Table : ADMIN.AAT  
+ 
+Attribute Descriptions . 
+ 
+Item  Item Format  Value Domain   Value Des cription  
+ 
+GFCODE  5,5,C   See table below  See table below  
+ 
+SDCODE  3,3,I  See table below  See table below  
+ 
+SDCODE  GFCODE   FEATURE DESCRIPTION  
+ (in the order of Hierarchy)  (in the order of Hierarchy)  
+ 
+700   EEZBL   Exclusive Economic Zone  
+705   CTZBL   Contiguous Zone limit  
+707   TTWBL   Territorial waters limit  
+710   OUTBL   Outline of the country  
+712   OUTBV   Outline of the country - Virtual  
+720   PRVBL   Province boundary  
+730   DSTBL   District boundary  
+740   DSDBL   DS Division boundary  
+750   LGVBL   Local  Govt. boundary  
+760   GNDBL   GN boundary  
+770   ADMNV   Arcs to close all ADMIN boundaries  
+ 
+YEAR   4,4,B     Year of source data compiled.  
+  
+METHOD  2,2,B   1  Digitized from 1:50,000 maps  
+    2  Digitized from 1:10,000 maps  
+3  Compiled form 1: 50,000 photograph s  
+4  Compiled form 1: 20,000 photographs  
+5  Compiled form 1: 8,000 photographs  
+6  Compiled by Ground Survey  
+7  Compiled by Manual Sketching   
+ 
+Polygon Attribute Table : ADMIN.PAT  
+ 
+Attribute Descriptions . 
+ 
+Item  Item Format  Value Domain   Value Description  
+ 
+
+21 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+ PROV   3,3,C   CP   Central Province  
+    EP   Eastern Province  
+NP   Northern Province  
+    NC   North Central Province  
+    NW   North Western Province  
+    SG   Sabaragamuwa Province  
+SP   Southern Province  
+UP   Uva Province  
+WP   Western Province  
+ 
+ 
+DISTRICT  12,12,C  AMPARA   Ampara  
+    ANURADHAPURA  Anuradhapura  
+    BADULLA   Badulla  
+    BATTICALOA  Batticaloa  
+    COLOMBO   Colombo  
+    GALLE   Galle  
+    GAMPAHA   Gampaha  
+    HAMBANTOTA  Hambantota  
+    JAFFNA   Jaffna  
+    MANNAR   Mannar  
+    MATARA   Matara  
+    MATALE   Matale  
+    MULLATIVU   Mullativu  
+    KALUTARA   Kalutara  
+    KANDY   Kandy  
+    KEGALLE   Kegalle  
+    KILLIOCHCHI  Killinochchi  
+    KURUNEGALA  Kurunegala  
+    MONERAGALA  Monaragala  
+    NUWARAELIYA  Nuwaraeliya  
+    POLONNARUWA  Polonnaruwa  
+    PUTTLAM   Puttlam  
+    RATNAPURA  Ratnapura     
+    TRINCOMALEE  Trincomalee    
+    VAVUNIA   Vavunia  
+ 
+DSAREA  12,12,C   see table annexed  see table annexed  
+ 
+SDCODE  4,4,I   see table annexed  see table annexed  
+ 
+LGAREA  ??,??,C    MCCOLOMBO  Colombo M.C  
+     UCGAMPAHA  Gampaha U.C.  
+     DSGAM PAHA  Gampaha DS Div.  
+     *   
+GNAREA  ??,??,C  
+ 
+Note:  
+ Since the DS area list is too long this may be put in an appendix.  
+ 
+* Name of Local authority with MC, UC or DS as appropriate at the beginning.  
+
+22 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+ Coverage name  : RESERVES  
+ 
+Scale of compilation  : 1:1,000 &  1: 50,000  
+ 
+Description   : All reservation areas.  
+ 
+Feature Class   : Arcs and Polygons  
+ 
+Features  : Arcs that define reservation cover polygons listed below and 
+polygons of such reservation areas.  
+ 
+Arc Attribute Table  : No arc attributes  
+ 
+Polygon Attribute Table  : RESERVES.PAT  
+ 
+Attribute Descriptions : 
+ 
+Item  Item Format  Value Domain   Value Description  
+ 
+GFCODE  5,5,C  See table below  See table below  
+ 
+SDCODE  3,3,I  See table below  See table below  
+ 
+SDCODE  GFCODE   FEATURE DESCRIPTION  
+ 
+800 FRRSA   Forest Reserves.  
+810 WLRSA   Wildlife Reserves  
+ 
+NAME   50,50,C  * Name of the reservation  
+ 
+YEAR   4,4,B      Year of data collection.  
+  
+METHOD  2,2,B   1   Digitized from 1:50,000 maps  
+    2   Digitized from 1:10,000 maps  
+7 Compiled form 1: 50,000 photographs  
+8 Compiled form 1: 20,0 00 photographs  
+9 Compiled form 1: 8,000 photographs  
+10 Compiled by Ground Survey  
+7   Compiled by Manual Sketching.  
+ 
+
+23 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+ Coverage name  : UTILITY  
+ 
+Scale of compilation  : 1:10,000 only  
+ 
+Feature Class   : Arcs  
+ 
+Description   : All Utilities  
+ 
+Features   : Linear features showing all utilities  
+ 
+Attribute Table  : UTILITY.AAT  
+ 
+Attribute descriptions  : 
+ 
+Item  Item Format  Value Domain   Value Description  
+ 
+GFCODE  5,5,C    PWERL   Power transmission lines  
+    WTERL   Water pipe lines  
+    WTNN L  Water Tunnel  
+ 
+TYPE   8,8,C   15KV    Voltage  
+     
+ 
+SDCODE  3,3,I    900    Power transmission lines  
+910 Water pipe lines  
+920   Water Tunnel  
+ 
+NAME   30,30,C     Name of the utility if any.  
+ 
+YEAR   4,4,B      Year of data collection.  
+  
+METHOD  2,2,B   1   Digitized from 1:50,000 maps  
+    2   Digitiz ed from 1:10,000 maps  
+3   Compiled form 1: 50,000 photographs  
+4   Compiled form 1: 20,000 photographs  
+5   Compiled form 1: 8,000 photographs  
+6   Compiled by Ground Survey  
+7   Compiled by Manual Sketching  
+ 
+
+24 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+ Coverage name  : CONTROL  
+ 
+Scale of compilation  : 1:10,000 & 1: 50,000  
+ 
+Feature Class   : Arcs and Points  
+ 
+Description  : Horizontal and Vertical control traverses and points  
+ 
+Features  : Primary, secondary, and tertiary traverses, primary, secondary, & tertiary  
+triangulation points, GPS control points, Fun damental Benchmarks,  
+primary, secondary, & tertiary level lines.  
+ 
+ARC Attribute Table : CONTROL.AAT  
+ 
+Attribute Descriptions : 
+Item  Item Format  Value Domain   Value Description   
+GFCODE  4,4,C   PTVL    Primary Traverse Line  
+ STVL  Secondary Traverse Line  
+ TTVL  Tertiary Traverse Line  
+ PLVL  Primary Level Line  
+ SLVL  Secondary Level Line  
+ TLVL  Tertiary Level Line  
+  
+TRID   4,4,C      Traverse/level line number  
+ 
+YEAR   4,4,B      Year of data collection.  
+ 
+POINT Attribute Table : CONTROL.PAT  
+ 
+Attribute Descriptions : 
+Item  Item Format  Value Domain   Value Description   
+ 
+GFCODE  4,4,C   PTGP    Primary triangulation point  
+ STGP   Secondary Triangulation Point  
+ TTGP   Tertiary Triangulation Point  
+ GPSP   GPS control point  
+ PTVP   Primary Traverse Point  
+ STVP   Secondary Traverse Point  
+ TTVP   Tertiary Traverse Point  
+ FBMP   Fundamental Bench Mark  
+ 
+STID   4,4,C      Station ID Number  
+ 
+NORTHING  6,6,F,3      North coordinate  
+ 
+EASTING  6,6,F,3      East coordinate  
+ 
+ELEVATION  4,4,F,3      Elevation  
+ 
+YEAR   4,4,B      Year established or observed  
+
+25 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+ Coverage name  : GRID  
+ 
+Scale of compilation  : 1:10,000 & 1: 50,000  
+ 
+Feature Class   : Arcs  
+ 
+Description   : All Grid lines  
+ 
+Features   : Linear features showing the sheet limits & grids  
+ 
+Attribute Table  : GRID.AAT  
+ 
+Attribute descriptions  : 
+ 
+Item  Item Format  Value Domain   Value Description  
+ 
+GFCODE  5,5,C    GRIDL   Tile limits & Grids  
+     
+SDCODE  3,3,I    999     
+ 
+  
+
+26 | P a g e  
+Topographic Database Specifications & Data Dictionary – Survey Department  
+  
+ 
+Feature Definitions  
+ 
+Note:  
+ 
+We shall start spending time on this once the other parts are finalised. The purpose of 
+documenting feature definition is to identify the features without any ambiguity. Since 
+most features in our data base are self defined, some of them need not be define d at all. 
+However there is a need to include ‘Rules of Compilation’ for each feature. But features 
+like Main Road, Secondary Road, Lane, Track, need clear definitions.  
+ 
+ 

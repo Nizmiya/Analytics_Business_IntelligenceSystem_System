@@ -1,0 +1,101 @@
+FULL MODEL
+
+Call:
+lm(formula = Revenue ~ RoomsAvailable + OccupancyRate + ADR + 
+    MarketingSpend + StaffCount + GuestSatisfactionScore + LoyaltyMembers + 
+    HotelQualityRank, data = hotels)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-160233  -21159   -2741   17499  214066 
+
+Coefficients:
+                         Estimate Std. Error t value Pr(>|t|)    
+(Intercept)            -8.438e+05  2.557e+04 -32.997  < 2e-16 ***
+RoomsAvailable          1.496e+03  1.531e+02   9.771  < 2e-16 ***
+OccupancyRate           6.418e+05  2.070e+04  30.996  < 2e-16 ***
+ADR                     3.762e+03  1.133e+02  33.198  < 2e-16 ***
+MarketingSpend         -6.792e-02  3.534e-01  -0.192    0.848    
+StaffCount             -2.941e+02  5.857e+02  -0.502    0.616    
+GuestSatisfactionScore -2.059e+03  1.777e+03  -1.159    0.247    
+LoyaltyMembers          8.266e+01  6.716e+00  12.308  < 2e-16 ***
+HotelQualityRank       -6.344e+04  7.625e+03  -8.320 8.72e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 39720 on 491 degrees of freedom
+Multiple R-squared:  0.9678,	Adjusted R-squared:  0.9673 
+F-statistic:  1846 on 8 and 491 DF,  p-value: < 2.2e-16
+
+
+REDUCED MODEL
+
+Call:
+lm(formula = fmla, data = hotels)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-157894  -20540   -1901   18086  215858 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(>|t|)    
+(Intercept)      -8.592e+05  2.183e+04  -39.36   <2e-16 ***
+RoomsAvailable    1.441e+03  9.743e+01   14.79   <2e-16 ***
+OccupancyRate     6.427e+05  2.065e+04   31.13   <2e-16 ***
+ADR               3.772e+03  1.126e+02   33.50   <2e-16 ***
+LoyaltyMembers    8.246e+01  6.681e+00   12.34   <2e-16 ***
+HotelQualityRank -6.564e+04  7.342e+03   -8.94   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 39670 on 494 degrees of freedom
+Multiple R-squared:  0.9677,	Adjusted R-squared:  0.9674 
+F-statistic:  2961 on 5 and 494 DF,  p-value: < 2.2e-16
+
+
+ANOVA (Full vs Reduced)
+Analysis of Variance Table
+
+Model 1: Revenue ~ RoomsAvailable + OccupancyRate + ADR + LoyaltyMembers + 
+    HotelQualityRank
+Model 2: Revenue ~ RoomsAvailable + OccupancyRate + ADR + MarketingSpend + 
+    StaffCount + GuestSatisfactionScore + LoyaltyMembers + HotelQualityRank
+  Res.Df        RSS Df  Sum of Sq      F Pr(>F)
+1    494 7.7732e+11                            
+2    491 7.7467e+11  3 2647685576 0.5594 0.6421
+
+VIF
+  RoomsAvailable    OccupancyRate              ADR   LoyaltyMembers HotelQualityRank 
+       15.506382         1.564771         1.671369        19.073928         5.796925 
+
+Breusch-Pagan
+
+	studentized Breusch-Pagan test
+
+data:  model_red
+BP = 34.804, df = 5, p-value = 1.646e-06
+
+
+Durbin-Watson
+
+	Durbin-Watson test
+
+data:  model_red
+DW = 1.9102, p-value = 0.1572
+alternative hypothesis: true autocorrelation is greater than 0
+
+
+Residuals Normality
+
+	Shapiro-Wilk normality test
+
+data:  residuals(model_red)
+W = 0.95575, p-value = 4.26e-11
+
+
+ANOVA (Revenue by Quality Rank)
+                          Df    Sum Sq   Mean Sq F value   Pr(>F)    
+factor(HotelQualityRank)   2 3.147e+12 1.574e+12   37.37 7.59e-16 ***
+Residuals                497 2.093e+13 4.211e+10                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1

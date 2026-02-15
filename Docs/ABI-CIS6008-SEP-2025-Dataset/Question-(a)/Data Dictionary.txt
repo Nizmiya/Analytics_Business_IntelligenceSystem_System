@@ -1,0 +1,16 @@
+Data dictionary: Hospitality Sector Dataset 2025 (Hotels_2025)
+
+Note: The data associated with this dataset reflects worldwide hospitality sector scenario. Therefore, the findings should be localized to the Sri Lanka Hotel and Tourism Sector.
+Variable Name	Data Type	Description
+RoomsAvailable		Number of rooms available in the hotel. Hotels range from ~50 rooms (small boutique) to ~300 rooms (large property). Count (rooms)
+OccupancyRate		Proportion of rooms occupied during the month. Values are capped between 0.40 (40%) and 1.00 (100%). Proportion (0–1)
+ADR	Float	Average Daily Rate (ADR) – average revenue earned per occupied room per day. Higher ADR indicates premium pricing. USD ($)
+MarketingSpend	Float	Monthly spending on marketing and promotions (ads, campaigns, partnerships).
+StaffCount	Integer	Approximate number of staff working in the hotel, roughly proportional to the number of rooms (~1 staff per 5 rooms). Count (employees)
+HotelQualityRank	Categorical (String)	A derived hotel quality ranking based on ADR and OccupancyRate.
+• High → ADR > 130 and OccupancyRate > 0.75
+• Medium → ADR ≥ 100 and OccupancyRate ≥ 0.60
+• Low → ADR < 100 or OccupancyRate < 0.60
+GuestSatisfactionScore	Float	Average monthly guest satisfaction rating, simulated based on hotel quality rank (higher for better hotels).
+LoyaltyMembers	Integer	Number of registered loyalty program members, correlated with hotel size and quality (higher for bigger, better-ranked hotels).
+Revenue	Float	Total monthly revenue, primarily derived from rooms sold (RoomsAvailable × OccupancyRate × ADR × 30 days), plus marketing impact and random variation. USD ($)

@@ -1,0 +1,80 @@
+================================================================================
+GOOGLE EARTH PLACEMARK - Name & Description (Copy-paste for each zone)
+================================================================================
+
+For each zone: Search "[Name] Sri Lanka" → Add Placemark → Fill below → OK
+
+--------------------------------------------------------------------------------
+SET 1 - Colombo & Greater Colombo
+--------------------------------------------------------------------------------
+Negombo         | District: Gampaha. Region: Colombo & Greater Colombo.
+Colombo         | District: Colombo. Region: Colombo & Greater Colombo.
+Mount Lavinia   | District: Colombo. Region: Colombo & Greater Colombo.
+
+--------------------------------------------------------------------------------
+SET 2 - South Coast
+--------------------------------------------------------------------------------
+Wadduwa         | District: Kalutara. Region: South Coast.
+Kalutara        | District: Kalutara. Region: South Coast.
+Beruwala        | District: Kalutara. Region: South Coast.
+Bentota         | District: Galle. Region: South Coast.
+Balapitiya      | District: Galle. Region: South Coast.
+Ahungalla       | District: Galle. Region: South Coast.
+Hikkaduwa       | District: Galle. Region: South Coast.
+Galle           | District: Galle. Region: South Coast.
+Unawatuna       | District: Galle. Region: South Coast.
+Koggala         | District: Galle. Region: South Coast.
+Weligama        | District: Matara. Region: South Coast.
+Mirissa         | District: Matara. Region: South Coast.
+Matara          | District: Matara. Region: South Coast.
+Tangalle        | District: Hambantota. Region: South Coast.
+Hambantota      | District: Hambantota. Region: South Coast.
+Tissamaharama   | District: Hambantota. Region: South Coast.
+
+--------------------------------------------------------------------------------
+SET 3 - East Coast
+--------------------------------------------------------------------------------
+Arugambay       | District: Ampara. Region: East Coast.
+Pasikudah       | District: Batticaloa. Region: East Coast.
+Trincomalee     | District: Trincomalee. Region: East Coast.
+Nilaveli        | District: Trincomalee. Region: East Coast.
+
+--------------------------------------------------------------------------------
+SET 4 - West Coast
+--------------------------------------------------------------------------------
+Kalpitiya       | District: Puttalam. Region: West Coast.
+Marawila        | District: Gampaha. Region: West Coast.
+Waikkala        | District: Gampaha. Region: West Coast.
+
+--------------------------------------------------------------------------------
+SET 5 - High Country
+--------------------------------------------------------------------------------
+Nuwara Eliya    | District: Nuwara Eliya. Region: High Country.
+Bandarawela     | District: Badulla. Region: High Country.
+Maskeliya       | District: Nuwara Eliya. Region: High Country.
+
+--------------------------------------------------------------------------------
+SET 6 - Ancient Cities
+--------------------------------------------------------------------------------
+Polonnaruwa     | District: Polonnaruwa. Region: Ancient Cities.
+Habarana        | District: Anuradhapura. Region: Ancient Cities.
+Sigiriya        | District: Matale. Region: Ancient Cities.
+Giritale        | District: Polonnaruwa. Region: Ancient Cities.
+Anuradhapura    | District: Anuradhapura. Region: Ancient Cities.
+Dambulla        | District: Matale. Region: Ancient Cities.
+Kandy           | District: Kandy. Region: Ancient Cities.
+Matale          | District: Matale. Region: Ancient Cities.
+Victoria        | District: Kandy. Region: Ancient Cities.
+
+--------------------------------------------------------------------------------
+SET 7 - Other
+--------------------------------------------------------------------------------
+Yala            | District: Hambantota. Region: Other (Wildlife).
+Udawalawa       | District: Monaragala. Region: Other (Wildlife).
+Wasgamuwa       | District: Matale. Region: Other (Wildlife).
+Pinnawala       | District: Kegalle. Region: Other (Elephant Sanctuary).
+Ratnapura       | District: Ratnapura. Region: Other (Gems).
+
+================================================================================
+Total: 40 zones. After all done: Right-click folder → Save Place As → SL_TD_Zones_2025.kmz
+================================================================================

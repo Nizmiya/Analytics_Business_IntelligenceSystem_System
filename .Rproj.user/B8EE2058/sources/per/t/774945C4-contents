@@ -1,0 +1,235 @@
+## Task B: Tourist Arrivals Analysis (R)
+## Creates charts + insights for report/QGIS.
+
+## 1) Setup -------------------------------------------------------------------
+required_packages <- c("readr")
+to_install <- setdiff(required_packages, rownames(installed.packages()))
+if (length(to_install) > 0) {
+  install.packages(to_install)
+}
+lapply(required_packages, library, character.only = TRUE)
+
+show_plots <- TRUE
+output_dir <- "Task B/outputs"
+dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
+
+step_header <- function(step, title) {
+  cat("\n", strrep("=", 60), "\n", sep = "")
+  cat("Step ", step, ": ", title, "\n", sep = "")
+  cat(strrep("=", 60), "\n")
+}
+
+## 2) Load data ---------------------------------------------------------------
+data_path <- "Task B/SL_Tourists-2025.csv"
+tourists <- read_csv(data_path, show_col_types = FALSE)
+
+step_header(1, "Data loaded")
+cat("Source:", data_path, "\n")
+cat("Rows:", nrow(tourists), "Cols:", ncol(tourists), "\n")
+print(head(tourists, 5))
+
+## 3) Basic statistics --------------------------------------------------------
+total_arrivals <- sum(tourists$Total_Tourists_Arrivals, na.rm = TRUE)
+
+step_header(2, "Basic statistics")
+cat("Total Tourist Arrivals:", format(round(total_arrivals), big.mark = ","), "\n")
+cat("Number of Source Countries:", nrow(tourists), "\n")
+cat("Average per Country:", format(round(mean(tourists$Total_Tourists_Arrivals)), big.mark = ","), "\n")
+cat("Median:", format(round(median(tourists$Total_Tourists_Arrivals)), big.mark = ","), "\n")
+cat("Max:", format(round(max(tourists$Total_Tourists_Arrivals)), big.mark = ","), "\n")
+cat("Min:", format(round(min(tourists$Total_Tourists_Arrivals)), big.mark = ","), "\n")
+
+## 4) Top countries -----------------------------------------------------------
+tourists_sorted <- tourists[order(-tourists$Total_Tourists_Arrivals), ]
+top10 <- head(tourists_sorted, 10)
+top20 <- head(tourists_sorted, 20)
+
+top10_total <- sum(top10$Total_Tourists_Arrivals)
+top10_pct <- (top10_total / total_arrivals) * 100
+
+step_header(3, "Top 10 countries")
+print(top10)
+cat("Top 10 countries account for:", round(top10_pct, 1), "% of total arrivals\n")
+
+## 5) Regional analysis --------------------------------------------------------
+asia_countries <- c(
+  "India", "China", "Bangladesh", "Pakistan", "Japan", "Thailand",
+  "Malaysia", "Singapore", "Indonesia", "Philippines", "South Korea",
+  "Vietnam", "Myanmar", "Cambodia", "Nepal", "Bhutan"
+)
+
+europe_countries <- c(
+  "United Kingdom", "Germany", "France", "Netherlands", "Italy",
+  "Spain", "Switzerland", "Austria", "Belgium", "Sweden", "Denmark",
+  "Norway", "Finland", "Poland", "Czech Republic", "Ireland"
+)
+
+asia_total <- sum(tourists_sorted$Total_Tourists_Arrivals[tourists_sorted$Country_Name %in% asia_countries])
+europe_total <- sum(tourists_sorted$Total_Tourists_Arrivals[tourists_sorted$Country_Name %in% europe_countries])
+russia_total <- sum(tourists_sorted$Total_Tourists_Arrivals[tourists_sorted$Country_Name == "Russian Federation"])
+
+step_header(4, "Regional analysis")
+cat("Asia:", format(round(asia_total), big.mark = ","), "(", round(asia_total / total_arrivals * 100, 1), "%)\n")
+cat("Europe:", format(round(europe_total), big.mark = ","), "(", round(europe_total / total_arrivals * 100, 1), "%)\n")
+cat("Russia:", format(round(russia_total), big.mark = ","), "(", round(russia_total / total_arrivals * 100, 1), "%)\n")
+
+## 6) Charts ------------------------------------------------------------------
+step_header(5, "Charts (4-in-1)")
+
+chart_path <- "Task B/Task_B_Analysis_Charts.png"
+png(chart_path, width = 1600, height = 1000, res = 150)
+par(mfrow = c(2, 2), mar = c(5, 8, 4, 2))
+
+## 6.1 Top 20 countries bar chart
+barplot(
+  rev(top20$Total_Tourists_Arrivals),
+  names.arg = rev(top20$Country_Name),
+  horiz = TRUE,
+  las = 1,
+  col = colorRampPalette(c("#fee8c8", "#e34a33"))(20),
+  main = "Top 20 Source Countries (Jan-Aug 2025)",
+  xlab = "Tourist Arrivals"
+)
+
+## 6.2 Top 10 pie chart
+others <- data.frame(
+  Country_Name = "Others",
+  Total_Tourists_Arrivals = total_arrivals - top10_total
+)
+pie_data <- rbind(top10, others)
+pie_colors <- rainbow(nrow(pie_data))
+par(mar = c(4, 4, 4, 10), xpd = TRUE)
+pie(
+  pie_data$Total_Tourists_Arrivals,
+  labels = NA,
+  main = "Market Share: Top 10 + Others",
+  col = pie_colors
+)
+legend(
+  "right",
+  legend = pie_data$Country_Name,
+  fill = pie_colors,
+  cex = 0.7,
+  bty = "n",
+  inset = c(-0.35, 0)
+)
+par(mar = c(5, 8, 4, 2), xpd = FALSE)
+
+## 6.3 Distribution by arrival volume
+bins <- c(0, 100, 1000, 10000, 50000, 400000)
+labels <- c("Very Low\n(1-100)", "Low\n(101-1K)", "Medium\n(1K-10K)",
+            "High\n(10K-50K)", "Very High\n(50K+)")
+tourists_sorted$Category <- cut(tourists_sorted$Total_Tourists_Arrivals, breaks = bins, labels = labels)
+category_counts <- table(tourists_sorted$Category)
+
+barplot(
+  category_counts,
+  col = c("#fee5d9", "#fcae91", "#fb6a4a", "#de2d26", "#a50f15"),
+  main = "Distribution of Countries by Arrival Volume",
+  ylab = "Number of Countries",
+  las = 1
+)
+
+## 6.4 Cumulative percentage
+tourists_sorted$Cumulative_Pct <- cumsum(tourists_sorted$Total_Tourists_Arrivals) / total_arrivals * 100
+plot(
+  tourists_sorted$Cumulative_Pct,
+  type = "l",
+  lwd = 2,
+  col = "#de2d26",
+  xlab = "Number of Countries (ranked)",
+  ylab = "Cumulative % of Total Arrivals",
+  main = "Cumulative Tourist Arrivals by Country Rank"
+)
+abline(h = 50, lty = 2, col = "gray")
+abline(h = 80, lty = 2, col = "gray")
+
+countries_80pct <- which(tourists_sorted$Cumulative_Pct >= 80)[1]
+points(countries_80pct, 80, pch = 19, col = "red")
+text(countries_80pct + 5, 80, paste(countries_80pct, "countries = 80%"), col = "red")
+
+dev.off()
+if (show_plots) {
+  par(mfrow = c(2, 2), mar = c(5, 8, 4, 2))
+  barplot(
+    rev(top20$Total_Tourists_Arrivals),
+    names.arg = rev(top20$Country_Name),
+    horiz = TRUE,
+    las = 1,
+    col = colorRampPalette(c("#fee8c8", "#e34a33"))(20),
+    main = "Top 20 Source Countries (Jan-Aug 2025)",
+    xlab = "Tourist Arrivals"
+  )
+  pie_colors <- rainbow(nrow(pie_data))
+  par(mar = c(4, 4, 4, 10), xpd = TRUE)
+  pie(
+    pie_data$Total_Tourists_Arrivals,
+    labels = NA,
+    main = "Market Share: Top 10 + Others",
+    col = pie_colors
+  )
+  legend(
+    "right",
+    legend = pie_data$Country_Name,
+    fill = pie_colors,
+    cex = 0.7,
+    bty = "n",
+    inset = c(-0.35, 0)
+  )
+  par(mar = c(5, 8, 4, 2), xpd = FALSE)
+  barplot(
+    category_counts,
+    col = c("#fee5d9", "#fcae91", "#fb6a4a", "#de2d26", "#a50f15"),
+    main = "Distribution of Countries by Arrival Volume",
+    ylab = "Number of Countries",
+    las = 1
+  )
+  plot(
+    tourists_sorted$Cumulative_Pct,
+    type = "l",
+    lwd = 2,
+    col = "#de2d26",
+    xlab = "Number of Countries (ranked)",
+    ylab = "Cumulative % of Total Arrivals",
+    main = "Cumulative Tourist Arrivals by Country Rank"
+  )
+  abline(h = 50, lty = 2, col = "gray")
+  abline(h = 80, lty = 2, col = "gray")
+  points(countries_80pct, 80, pch = 19, col = "red")
+  text(countries_80pct + 5, 80, paste(countries_80pct, "countries = 80%"), col = "red")
+}
+cat("Charts saved:", chart_path, "\n")
+
+## 7) Key insights -------------------------------------------------------------
+step_header(6, "Key insights for discussion")
+india_pct <- (top10$Total_Tourists_Arrivals[1] / total_arrivals) * 100
+uk_ru_de_pct <- sum(top10$Total_Tourists_Arrivals[2:4]) / total_arrivals * 100
+very_low <- sum(tourists_sorted$Total_Tourists_Arrivals <= 100)
+
+cat("Market concentration:\n")
+cat("- Top 10 countries:", round(top10_pct, 1), "% of total arrivals\n")
+cat("- Top", countries_80pct, "countries = 80% of total arrivals\n\n")
+
+cat("Dominant markets:\n")
+cat("- India alone:", round(india_pct, 1), "%\n")
+cat("- UK + Russia + Germany:", round(uk_ru_de_pct, 1), "%\n\n")
+
+cat("Distribution:\n")
+cat("-", very_low, "countries send <100 tourists\n\n")
+
+cat("Geographic patterns:\n")
+cat("- Asia dominates due to proximity\n")
+cat("- Strong European presence\n")
+cat("- Russia significant seasonal market\n")
+
+writeLines(
+  c(
+    "Task B insights:",
+    paste("Top 10 countries:", round(top10_pct, 1), "% of total arrivals"),
+    paste("Top", countries_80pct, "countries = 80% of total arrivals"),
+    paste("India alone:", round(india_pct, 1), "%"),
+    paste("UK + Russia + Germany:", round(uk_ru_de_pct, 1), "%"),
+    paste("Very low (<100) countries:", very_low)
+  ),
+  con = file.path(output_dir, "task_b_insights.txt")
+)

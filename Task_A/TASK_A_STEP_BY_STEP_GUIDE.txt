@@ -1,0 +1,401 @@
+# TASK A: STEP-BY-STEP ANALYSIS GUIDE
+# Hotel Revenue Analysis - Statistical Modeling
+
+## OVERVIEW
+This guide provides complete steps to analyze hotel revenue using statistical and business analytics tools in R/RStudio.
+
+---
+
+## STEP 1: DATA PREPARATION (Python - COMPLETED ✓)
+
+### What was done:
+1. Converted HotelQualityRank values only (column name unchanged):
+   - Values encoded to 0, 1, 2
+
+2. Output file: HOTELS_2025.csv (saved in Task_A folder)
+
+### Dataset Summary:
+- Total records: 500 hotels
+- Variables: 9 (same columns; HotelQualityRank now has 0, 1, 2)
+- Quality distribution: 0 (133), 1 (317), 2 (50)
+
+---
+
+## STEP 2: R/RSTUDIO SETUP
+
+### Install Required Packages:
+```r
+install.packages(c("ggplot2", "corrplot", "car", "lmtest"))
+```
+
+### Load Libraries:
+```r
+library(ggplot2)
+library(corrplot)
+library(car)
+library(lmtest)
+```
+
+---
+
+## STEP 3: LOAD AND EXPLORE DATA
+
+### Load Data:
+```r
+hotels <- read.csv("HOTELS_2025.csv")
+```
+
+### Basic Exploration:
+```r
+# Dimensions
+dim(hotels)  # Should show 500 rows, 9 columns
+
+# Structure
+str(hotels)
+
+# Summary statistics
+summary(hotels)
+
+# Check missing values
+colSums(is.na(hotels))
+```
+
+---
+
+## STEP 4: NORMALITY TESTING (30 marks requirement)
+
+### 4.1 Shapiro-Wilk Test for Revenue
+```r
+shapiro.test(hotels$Revenue)
+```
+
+**Interpretation:**
+- H0: Data is normally distributed
+- H1: Data is not normally distributed
+- If p-value > 0.05 → Normal distribution
+- If p-value < 0.05 → Not normal
+
+### 4.2 Visual Checks
+```r
+# Q-Q Plot
+qqnorm(hotels$Revenue)
+qqline(hotels$Revenue, col = "red")
+
+# Histogram with normal curve
+hist(hotels$Revenue, probability = TRUE, 
+     main = "Revenue Distribution", breaks = 30)
+curve(dnorm(x, mean=mean(hotels$Revenue), 
+       sd=sd(hotels$Revenue)), add = TRUE, col = "red", lwd = 2)
+```
+
+---
+
+## STEP 5: CORRELATION ANALYSIS (30 marks requirement)
+
+### 5.1 Correlation Matrix
+```r
+# Select numeric variables
+numeric_vars <- hotels[, c("RoomsAvailable", "OccupancyRate", "ADR",
+                           "MarketingSpend", "StaffCount", "Revenue",
+                           "GuestSatisfactionScore", "LoyaltyMembers",
+                           "HotelQualityRank")]
+
+# Calculate correlation matrix
+cor_matrix <- cor(numeric_vars)
+print(round(cor_matrix, 3))
+```
+
+### 5.2 Correlation Plot
+```r
+corrplot(cor_matrix, method = "color", type = "upper",
+         addCoef.col = "black", number.cex = 0.7,
+         tl.col = "black", tl.srt = 45)
+```
+
+### 5.3 Identify Strongest Correlations with Revenue
+```r
+revenue_cor <- cor(numeric_vars[, -6], hotels$Revenue)
+sort(abs(revenue_cor), decreasing = TRUE)
+```
+
+**Expected Strong Predictors:**
+- RoomsAvailable
+- OccupancyRate
+- ADR (Average Daily Rate)
+- StaffCount
+- LoyaltyMembers
+
+---
+
+## STEP 6: SCATTER PLOTS (30 marks requirement)
+
+### Create Scatter Plots for Key Variables
+```r
+# Revenue vs RoomsAvailable
+plot(hotels$RoomsAvailable, hotels$Revenue,
+     main = "Revenue vs Rooms Available",
+     xlab = "Rooms Available", ylab = "Revenue",
+     pch = 19, col = rgb(0,0,1,0.5))
+abline(lm(Revenue ~ RoomsAvailable, data = hotels), col = "red", lwd = 2)
+
+# Revenue vs OccupancyRate
+plot(hotels$OccupancyRate, hotels$Revenue,
+     main = "Revenue vs Occupancy Rate",
+     xlab = "Occupancy Rate", ylab = "Revenue",
+     pch = 19, col = rgb(0,0,1,0.5))
+abline(lm(Revenue ~ OccupancyRate, data = hotels), col = "red", lwd = 2)
+
+# Revenue vs ADR
+plot(hotels$ADR, hotels$Revenue,
+     main = "Revenue vs ADR",
+     xlab = "ADR", ylab = "Revenue",
+     pch = 19, col = rgb(0,0,1,0.5))
+abline(lm(Revenue ~ ADR, data = hotels), col = "red", lwd = 2)
+
+# Revenue vs MarketingSpend
+plot(hotels$MarketingSpend, hotels$Revenue,
+     main = "Revenue vs Marketing Spend",
+     xlab = "Marketing Spend", ylab = "Revenue",
+     pch = 19, col = rgb(0,0,1,0.5))
+abline(lm(Revenue ~ MarketingSpend, data = hotels), col = "red", lwd = 2)
+```
+
+---
+
+## STEP 7: SIMPLE LINEAR REGRESSION (30 marks requirement)
+
+### Model 1: Revenue ~ RoomsAvailable
+```r
+model1 <- lm(Revenue ~ RoomsAvailable, data = hotels)
+summary(model1)
+```
+
+### Model 2: Revenue ~ OccupancyRate
+```r
+model2 <- lm(Revenue ~ OccupancyRate, data = hotels)
+summary(model2)
+```
+
+### Model 3: Revenue ~ ADR
+```r
+model3 <- lm(Revenue ~ ADR, data = hotels)
+summary(model3)
+```
+
+**Key Metrics to Report:**
+- R-squared (goodness of fit)
+- p-value (statistical significance)
+- Coefficient (slope)
+- Intercept
+- Regression equation
+
+---
+
+## STEP 8: MULTIPLE LINEAR REGRESSION (30 marks requirement)
+
+### 8.1 Full Model
+```r
+model_full <- lm(Revenue ~ RoomsAvailable + OccupancyRate + ADR + 
+                          MarketingSpend + StaffCount + 
+                          GuestSatisfactionScore + LoyaltyMembers + 
+                          HotelQualityRank, 
+                 data = hotels)
+summary(model_full)
+```
+
+### 8.2 Reduced Model (Based on Significant Predictors)
+```r
+model_reduced <- lm(Revenue ~ RoomsAvailable + OccupancyRate + 
+                              ADR + StaffCount + LoyaltyMembers,
+                    data = hotels)
+summary(model_reduced)
+```
+
+### 8.3 Model Comparison
+```r
+# AIC comparison (lower is better)
+AIC(model_full)
+AIC(model_reduced)
+
+# ANOVA comparison
+anova(model_reduced, model_full)
+```
+
+---
+
+## STEP 9: MODEL DIAGNOSTICS
+
+### 9.1 Diagnostic Plots
+```r
+par(mfrow = c(2, 2))
+plot(model_full)
+par(mfrow = c(1, 1))
+```
+
+**Plots to interpret:**
+1. Residuals vs Fitted (linearity check)
+2. Q-Q Plot (normality of residuals)
+3. Scale-Location (homoscedasticity)
+4. Residuals vs Leverage (outliers)
+
+### 9.2 Multicollinearity Check (VIF)
+```r
+library(car)
+vif(model_full)
+```
+
+**Interpretation:**
+- VIF < 5: No multicollinearity
+- VIF 5-10: Moderate multicollinearity
+- VIF > 10: High multicollinearity (problem)
+
+### 9.3 Heteroscedasticity Test
+```r
+library(lmtest)
+bptest(model_full)
+```
+
+---
+
+## STEP 10: DEVELOP STATISTICAL MODEL (Final Output)
+
+### Revenue Prediction Model Formula:
+Based on the multiple regression analysis, the final model will be:
+
+```
+Revenue = β0 + β1(RoomsAvailable) + β2(OccupancyRate) + 
+          β3(ADR) + β4(StaffCount) + β5(LoyaltyMembers) + ε
+```
+
+Where:
+- β0 = Intercept
+- β1, β2, β3, β4, β5 = Regression coefficients
+- ε = Error term
+
+### Example Model Output Structure:
+```r
+# Get model coefficients
+coefficients(model_reduced)
+
+# Model equation
+cat("Revenue =", coef(model_reduced)[1], "+",
+    coef(model_reduced)[2], "* RoomsAvailable +",
+    coef(model_reduced)[3], "* OccupancyRate +",
+    coef(model_reduced)[4], "* ADR +",
+    coef(model_reduced)[5], "* StaffCount +",
+    coef(model_reduced)[6], "* LoyaltyMembers")
+```
+
+---
+
+## STEP 11: PREDICTIONS AND VALIDATION
+
+### Make Predictions
+```r
+# Add predictions to dataset
+hotels$predicted_revenue <- predict(model_reduced, hotels)
+
+# Calculate prediction accuracy
+hotels$residual <- hotels$Revenue - hotels$predicted_revenue
+
+# Mean Absolute Error
+mae <- mean(abs(hotels$residual))
+cat("Mean Absolute Error:", mae)
+
+# Root Mean Squared Error
+rmse <- sqrt(mean(hotels$residual^2))
+cat("RMSE:", rmse)
+```
+
+### Actual vs Predicted Plot
+```r
+plot(hotels$Revenue, hotels$predicted_revenue,
+     main = "Actual vs Predicted Revenue",
+     xlab = "Actual Revenue", ylab = "Predicted Revenue",
+     pch = 19, col = rgb(0,0,1,0.5))
+abline(a = 0, b = 1, col = "red", lwd = 2)
+```
+
+---
+
+## STEP 12: CRITICAL DISCUSSION (For Report)
+
+### Key Points to Discuss:
+
+1. **Model Performance:**
+   - R-squared interpretation (% variance explained)
+   - Statistical significance of predictors
+   - Model fit quality
+
+2. **Variable Relationships:**
+   - Which factors most strongly influence revenue?
+   - Direction of relationships (positive/negative)
+   - Magnitude of effects
+
+3. **Implications for Sri Lanka Tourism Sector:**
+   - How can hotels optimize revenue?
+   - Which factors should management prioritize?
+   - Resource allocation recommendations
+   - Service quality improvements
+
+4. **Limitations:**
+   - Model assumptions (normality, linearity, etc.)
+   - Potential confounding variables
+   - Data quality considerations
+
+5. **Recommendations:**
+   - Evidence-based strategies for hotel managers
+   - Policy implications for tourism authorities
+   - Areas for future research
+
+---
+
+## EXPECTED OUTPUTS FOR SUBMISSION
+
+1. **R Script File**: task_a_analysis.R (provided)
+2. **PDF Plots**: All scatter plots, diagnostic plots, correlation matrix
+3. **Model Results**: Summary outputs of all regression models
+4. **CSV File**: Data with predictions
+5. **Screenshots**: Key R console outputs (Appendix A)
+
+---
+
+## MARKING CRITERIA CHECKLIST
+
+### Excellent (70-100):
+✓ Full normality testing (Shapiro-Wilk + Q-Q plots)
+✓ Complete correlation analysis with correlation matrix plot
+✓ Multiple scatter plots with regression lines
+✓ Simple linear regression for key variables
+✓ Multiple linear regression (full and reduced models)
+✓ Precise statistical model(s) developed
+✓ Model diagnostics (VIF, heteroscedasticity tests)
+✓ Excellent critical discussion of findings
+✓ Proper Harvard citations and references
+✓ All visualizations properly labeled
+
+### Key Success Factors:
+- Statistical rigor in hypothesis testing
+- Clear graphical representations
+- Comprehensive model development
+- Critical analysis linking to Sri Lanka tourism context
+- Professional presentation and documentation
+
+---
+
+## ADDITIONAL RESOURCES
+
+### Statistical Tests Reference:
+- **Normality**: Shapiro-Wilk (p > 0.05 = normal)
+- **Correlation**: Pearson correlation coefficient (-1 to +1)
+- **Regression**: R² (0 to 1, higher = better fit)
+- **Significance**: p-value < 0.05 = significant
+
+### Formula Reference:
+- **Simple Linear**: Y = β0 + β1X + ε
+- **Multiple Linear**: Y = β0 + β1X1 + β2X2 + ... + βnXn + ε
+- **R-squared**: 1 - (SSres / SStot)
+
+---
+
+END OF STEP-BY-STEP GUIDE

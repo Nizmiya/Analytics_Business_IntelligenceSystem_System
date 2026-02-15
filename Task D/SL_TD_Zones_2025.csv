@@ -1,0 +1,44 @@
+location_name,district_name,latitude,longitude,region
+Negombo,Gampaha,7.2088,79.8358,Colombo & Greater Colombo
+Colombo,Colombo,6.9271,79.8612,Colombo & Greater Colombo
+Mount Lavinia,Colombo,6.8381,79.8632,Colombo & Greater Colombo
+Wadduwa,Kalutara,6.6500,79.9333,South Coast
+Kalutara,Kalutara,6.5833,79.9667,South Coast
+Beruwala,Kalutara,6.4667,79.9833,South Coast
+Bentota,Galle,6.4167,79.9833,South Coast
+Balapitiya,Galle,6.2667,80.0667,South Coast
+Ahungalla,Galle,6.3333,80.0500,South Coast
+Hikkaduwa,Galle,6.1333,80.1000,South Coast
+Galle,Galle,6.0531,80.2110,South Coast
+Unawatuna,Galle,6.0167,80.2500,South Coast
+Koggala,Galle,5.9833,80.3333,South Coast
+Weligama,Matara,5.9667,80.4167,South Coast
+Mirissa,Matara,5.9500,80.4667,South Coast
+Matara,Matara,5.9495,80.5492,South Coast
+Tangalle,Hambantota,6.0167,80.8000,South Coast
+Hambantota,Hambantota,6.1167,81.1167,South Coast
+Tissamaharama,Hambantota,6.2833,81.2833,South Coast
+Arugambay,Ampara,6.8500,81.8500,East Coast
+Pasikudah,Batticaloa,7.9167,81.5667,East Coast
+Trincomalee,Trincomalee,8.5874,81.2152,East Coast
+Nilaveli,Trincomalee,8.7000,81.1667,East Coast
+Kalpitiya,Puttalam,8.2333,79.7667,West Coast
+Marawila,Gampaha,7.4167,79.8333,West Coast
+Waikkala,Gampaha,7.2833,79.8500,West Coast
+Nuwara Eliya,Nuwara Eliya,6.9497,80.7891,High Country
+Bandarawela,Badulla,6.8333,80.9833,High Country
+Maskeliya,Nuwara Eliya,6.8667,80.5833,High Country
+Polonnaruwa,Polonnaruwa,7.9333,81.0000,Ancient Cities
+Habarana,Anuradhapura,8.0833,80.7500,Ancient Cities
+Sigiriya,Matale,7.9569,80.7600,Ancient Cities
+Giritale,Polonnaruwa,7.9833,80.9167,Ancient Cities
+Anuradhapura,Anuradhapura,8.3114,80.4037,Ancient Cities
+Dambulla,Matale,7.8567,80.6514,Ancient Cities
+Kandy,Kandy,7.2936,80.6334,Ancient Cities
+Matale,Matale,7.4678,80.6244,Ancient Cities
+Victoria,Kandy,7.2333,80.7833,Ancient Cities
+Yala,Hambantota,6.3667,81.5167,Other
+Udawalawa,Monaragala,6.4500,80.8833,Other
+Wasgamuwa,Matale,7.7333,80.9167,Other
+Pinnawala,Kegalle,7.3000,80.3833,Other
+Ratnapura,Ratnapura,6.6847,80.4036,Other
